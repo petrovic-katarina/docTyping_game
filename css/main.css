@@ -65,5 +65,40 @@ body {
  width: 100%;
  height: 30px;
  color: black;
- background-color: pink;
+ /* background-color: pink; */
+}
+
+.typingLine {
+ position: absolute;
+ width: 100%;
+ height: 30px;
+ bottom: 0;
+ left: 0;
+ background-color: chocolate;
+}
+
+.mainInput {
+ background-color: chocolate;
+ width: 100%;
+ border: none;
+ color: white;
+ height: 30px;
+ font-size: 18px;
+ outline: none;
+}
+
+span {
+ position: absolute;
+ background-color: #d1e04a;
+ top: 0;
+ left: 0;
+ padding: 2px 4px;
+ color: black;
+ border: 1px solid black;
+ border-radius: 3px;
+}
+
+.danger {
+ background-color: red;
+ color: white;
 }
