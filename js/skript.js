@@ -14,20 +14,20 @@ function generateLines() {
 
 window.onload = function () {
  generateLines();
- start();
+ let startBtn = $('.startBtn');
+ startBtn.on('click', function () {
+  $(this).hide();
+  start();
+ }); mainInput.focus();
 };
 
 function start() {
- let startBtn = $('.startBtn');
+
  let mainInput = $('.mainInput');
  let allLines = $('.line');
  let allText = [];
-
- startBtn.on('click', startGame);
-
- function startGame() {
-  $(this).hide();
- }
+ let score = 0;
+ let displayResult = $('.displayResult');
 
  mainInput.focus();
 
@@ -51,12 +51,17 @@ function start() {
   let self = $(this);
   // console.log(allText);
   if (allText.includes(inputVal)) {
+   let index = allText.indexOf(inputVal);
+   allText.splice(index, 1);
+
    $('span').filter(function () {
     return $(this).text() == inputVal;
    }).css('background', 'blue').fadeOut(100, function () {
     $(this).remove();
    })
    self.val('');
+   score++;
+   displayResult.html(score);
   }
  }
 
