@@ -21,12 +21,15 @@ function start() {
  let startBtn = $('.startBtn');
  let mainInput = $('.mainInput');
  let allLines = $('.line');
+ let allText = [];
 
  startBtn.on('click', startGame);
 
  function startGame() {
   $(this).hide();
  }
+
+ mainInput.focus();
 
  // setup
  let speed = 1;
@@ -36,15 +39,38 @@ function start() {
 
  // console.log(typingWords);
 
+ let speedUp = setInterval(function () {
+  textLength++;
+  typingWords = words.filter(word => word.length == textLength);
+ }, 20000)
+
+ mainInput.on('keyup', checkInputTyping);
+
+ function checkInputTyping() {
+  let inputVal = $(this).val();
+  let self = $(this);
+  // console.log(allText);
+  if (allText.includes(inputVal)) {
+   $('span').filter(function () {
+    return $(this).text() == inputVal;
+   }).css('background', 'blue').fadeOut(100, function () {
+    $(this).remove();
+   })
+   self.val('');
+  }
+ }
+
  //insert spans
  function insertSpans() {
   for (let i = 0; i < allLines.length; i++) {
    let rand = Math.floor(Math.random() * 20);
    if (rand <= lvl) {
     let text = chooseText();
+    allText.push(text);
     $(allLines[i]).append(`<span>${text}</span>`)
    }
   }
+  setTimeout(insertSpans, 7000);
  }
  insertSpans();
 
@@ -73,7 +99,7 @@ function start() {
     $(el).addClass('danger')
    }
   })
- }, 10)
+ }, 100)
 
  function clearAllIntervals() {
   clearInterval(moveAll);
