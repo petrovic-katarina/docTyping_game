@@ -38,7 +38,6 @@ function start() {
  let lvl = 6;
 
  // console.log(typingWords);
-
  let speedUp = setInterval(function () {
   textLength++;
   typingWords = words.filter(word => word.length == textLength);
